@@ -1,0 +1,24 @@
+=== AES-256-CBC, file lớn ===
+    MB    enc s    dec s  enc MB/s  dec MB/s identical
+   100     0.14     0.08       696      1326 True
+  1000     1.42     0.78       703      1276 True
+  3000     4.38     2.43       685      1233 True
+
+=== RSA-OAEP-SHA256, mã hóa 32 byte ===
+ bits  e bit  d bit    enc ms    dec ms  dec/enc
+ 1024     17   1024    0.0137    0.0850      6.2
+ 2048     17   2045    0.0249    0.2621     10.5
+ 3072     17   3060    0.0449    0.7232     16.1
+ 4096     17   4095    0.0732    1.4534     19.9
+Giới hạn OAEP-SHA256 với 2048 bit: 190 byte; thử 190 byte: OK; 191 byte: bị từ chối
+
+=== SHA-256 avalanche (đổi 1 bit, 10000 lần) ===
+trung bình 128.09/256 bit (50.03%), min 97, max 160
+Hello: 185f8db32271fe25f561a6fc938b2e264306ec304eda518007d1764826381969
+Hellp: 2113cd4a7aebc3a400a234c3de8a5c0c4d9fa8c6ca370d030aac9ab51e8c4476
+
+=== Chữ ký: PKCS#1 v1.5 vs PSS, cùng dữ liệu, cùng khóa, 5 lần ===
+PKCS#1 v1.5: số chữ ký khác nhau = 1 / 5
+PSS        : số chữ ký khác nhau = 5 / 5
+PSS: cả 5 chữ ký xác minh đúng = True
+sửa dữ liệu: xác minh thất bại (đúng như mong đợi)
